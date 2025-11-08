@@ -1,8 +1,0 @@
-[build]
-builder = "nixpacks"
-
-[build.args]
-DOTNET_VERSION = "9.0"
-
-[deploy]
-startCommand = "dotnet ExamenParcial2.dll --urls http://0.0.0.0:$PORT"
