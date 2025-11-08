@@ -5,8 +5,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+    });
 builder.Services.AddSwaggerGen();
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 // Configurar Entity Framework
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -25,20 +30,20 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-app.UseCors("AllowAll");
-
-app.UseSwagger();
-app.UseSwaggerUI();
-
-app.UseAuthorization();
-
-app.MapControllers();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
 }
+app.UseCors("AllowAll");
+app.UseHttpsRedirection();
+app.UseAuthorization();
+app.MapControllers();
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-app.Run($"http://*:{port}");
+app.Run();
