@@ -1,0 +1,9 @@
+{
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "dotnet ExamenParcial2.dll --urls http://0.0.0.0:$PORT",
+    "restartPolicyType": "ON_FAILURE"
+  }
+}
