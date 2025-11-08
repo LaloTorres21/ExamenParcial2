@@ -17,10 +17,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins(
-                "https://registrocongresotics.netlify.app",
-                "http://localhost:3000"
-                )
+        policy.AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader();
     });
