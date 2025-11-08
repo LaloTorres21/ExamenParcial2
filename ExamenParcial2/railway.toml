@@ -1,0 +1,9 @@
+[buil]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "dotnet ExamenParcial2.dll"
+restartPolicyType = "ON_FAILURE"
+
+[env]
+ASPNETCORE_ENVIRONMENT = "Production"

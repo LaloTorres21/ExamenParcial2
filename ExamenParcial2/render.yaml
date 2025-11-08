@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: participantes-backend
-    env: dotnet
-    buildCommand: dotnet publish -c Release -o output
-    startCommand: cd output && ./ExamenParcial2
-    envVars:
-    - key: APNETCORE_ENVIRONMENT
-      value: Production
