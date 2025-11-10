@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ExamenParcial2.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
