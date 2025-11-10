@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExamenParcial2.Controllers;
 
+[ApiController]
 [Route("api/participantes")]
 public class ParticipantesController : ControllerBase
 {
