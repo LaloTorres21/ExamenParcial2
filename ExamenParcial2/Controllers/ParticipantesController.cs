@@ -53,12 +53,6 @@ public class ParticipantesController : ControllerBase
     [HttpPost("registro")]
     public async Task<ActionResult<Participante>> PostParticipante(Participante participante)
     {
-        Console.WriteLine("=== DATOS RECIBIDOS ===");
-        Console.WriteLine($"AceptaTerminos: {participante.AceptaTerminos}");
-        Console.WriteLine($"Nombre: {participante.Nombre}");
-        Console.WriteLine($"Email: {participante.Email}");
-        Console.WriteLine($"Todos los datos: {System.Text.Json.JsonSerializer.Serialize(participante)}");
-        
         if (!participante.AceptaTerminos)
         {
             Console.WriteLine("ERROR: AceptaTerminos es false");
@@ -72,11 +66,9 @@ public class ParticipantesController : ControllerBase
         {
             return BadRequest(new { message = "Participante existe" });
         }
-
-        Console.WriteLine("Creando nuevo participante...");
+        
         _context.Participantes.Add(participante);
         await _context.SaveChangesAsync();
-        Console.WriteLine("Participante creado exitosamente");
         return CreatedAtAction(nameof(GetParticipante), new { id = participante.Id }, participante);
     }
 }
